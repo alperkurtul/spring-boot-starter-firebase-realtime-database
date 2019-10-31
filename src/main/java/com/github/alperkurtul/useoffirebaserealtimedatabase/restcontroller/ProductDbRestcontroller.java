@@ -20,11 +20,14 @@ public class ProductDbRestcontroller {
     @RequestMapping(value = "/productRead", method = RequestMethod.POST)
     public Product productRead(@RequestParam String authKey, @RequestParam String firebaseId) {
 
-        FirebaseAuthKeyAndId firebaseAuthKeyAndId = new FirebaseAuthKeyAndId(authKey, firebaseId);
+        //FirebaseAuthKeyAndId firebaseAuthKeyAndId = new FirebaseAuthKeyAndId(authKey, firebaseId);
 
         Product product = new Product();
+        product.setAuthKey(authKey);
+        product.setFirebaseId(firebaseId);
 
-        Product resultProduct = productRepository.read(firebaseAuthKeyAndId, product);
+        //Product resultProduct = productRepository.read(firebaseAuthKeyAndId, product);
+        Product resultProduct = productRepository.read(product);
 
         return resultProduct;
 

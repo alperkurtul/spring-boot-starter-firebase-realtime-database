@@ -5,6 +5,10 @@ import com.github.alperkurtul.useoffirebaserealtimedatabase.model.FirebaseAuthKe
 import com.github.alperkurtul.useoffirebaserealtimedatabase.model.Product;
 import org.springframework.stereotype.Repository;
 
+//@Repository
+//public class ProductRepository extends FirebaseRealtimeDbRepoServiceImpl<FirebaseAuthKeyAndId, Product, String> {
+//}
+
 @Repository
-public class ProductRepository extends FirebaseRealtimeDbRepoServiceImpl<FirebaseAuthKeyAndId, Product, String> {
+public class ProductRepository extends FirebaseRealtimeDbRepoServiceImpl<Product, String> {
 }
