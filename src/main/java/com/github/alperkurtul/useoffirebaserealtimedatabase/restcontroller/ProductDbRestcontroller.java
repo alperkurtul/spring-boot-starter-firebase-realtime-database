@@ -1,6 +1,6 @@
 package com.github.alperkurtul.useoffirebaserealtimedatabase.restcontroller;
 
-import com.github.alperkurtul.useoffirebaserealtimedatabase.model.FirebaseAuthKeyAndId;
+import com.github.alperkurtul.useoffirebaserealtimedatabase.model.FirebaseAuthKeyAndDocumentId;
 import com.github.alperkurtul.useoffirebaserealtimedatabase.model.Product;
 import com.github.alperkurtul.useoffirebaserealtimedatabase.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.math.BigDecimal;
 
 @RestController
 public class ProductDbRestcontroller {
@@ -20,14 +18,7 @@ public class ProductDbRestcontroller {
     @RequestMapping(value = "/productRead", method = RequestMethod.POST)
     public Product productRead(@RequestParam String authKey, @RequestParam String firebaseId) {
 
-        //FirebaseAuthKeyAndId firebaseAuthKeyAndId = new FirebaseAuthKeyAndId(authKey, firebaseId);
-
-        Product product = new Product();
-        product.setAuthKey(authKey);
-        product.setFirebaseId(firebaseId);
-
-        //Product resultProduct = productRepository.read(firebaseAuthKeyAndId, product);
-        Product resultProduct = productRepository.read(product);
+        Product resultProduct = productRepository.read(new FirebaseAuthKeyAndDocumentId(authKey, firebaseId));
 
         return resultProduct;
 

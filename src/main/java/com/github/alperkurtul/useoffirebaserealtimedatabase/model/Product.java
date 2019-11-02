@@ -1,37 +1,14 @@
 package com.github.alperkurtul.useoffirebaserealtimedatabase.model;
 
-import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseAuthKey;
-import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseDocument;
-import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseId;
+import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseDocumentPath;
 
 import java.math.BigDecimal;
 
-@FirebaseDocument("/product")
+@FirebaseDocumentPath("/product")
 public class Product {
-    @FirebaseAuthKey
-    private String authKey;
-    @FirebaseId
-    private String firebaseId;
-
     private String id;
     private String name;
     private BigDecimal price;
-
-    public String getAuthKey() {
-        return authKey;
-    }
-
-    public void setAuthKey(String authKey) {
-        this.authKey = authKey;
-    }
-
-    public String getFirebaseId() {
-        return firebaseId;
-    }
-
-    public void setFirebaseId(String firebaseId) {
-        this.firebaseId = firebaseId;
-    }
 
     public String getId() {
         return id;

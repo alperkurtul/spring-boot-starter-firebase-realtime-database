@@ -1,14 +1,12 @@
 package com.github.alperkurtul.useoffirebaserealtimedatabase.model;
 
-import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseAuthKey;
-import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseDocument;
-import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseId;
+import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseDocumentId;
+import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseUserAuthKey;
 
-@FirebaseDocument("/product")
-public class FirebaseAuthKeyAndId {
-    @FirebaseAuthKey
+public class FirebaseAuthKeyAndDocumentId {
+    @FirebaseUserAuthKey
     private String authKey;
-    @FirebaseId
+    @FirebaseDocumentId
     private String firebaseId;
 
     public String getAuthKey() {
@@ -27,7 +25,7 @@ public class FirebaseAuthKeyAndId {
         this.firebaseId = firebaseId;
     }
 
-    public FirebaseAuthKeyAndId(String authKey, String firebaseId) {
+    public FirebaseAuthKeyAndDocumentId(String authKey, String firebaseId) {
         this.authKey = authKey;
         this.firebaseId = firebaseId;
     }

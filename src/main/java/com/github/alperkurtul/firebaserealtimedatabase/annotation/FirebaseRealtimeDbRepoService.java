@@ -6,8 +6,8 @@ package com.github.alperkurtul.firebaserealtimedatabase.annotation;
 //
 //}
 
-public interface FirebaseRealtimeDbRepoService<T, ID> {
+public interface FirebaseRealtimeDbRepoService<FC, FD, ID> {
 
-    T read(T obj1);
+    FD read(FC fc);
 
 }
