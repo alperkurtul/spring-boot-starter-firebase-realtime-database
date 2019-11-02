@@ -39,26 +39,25 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
                     documentPath = "/" + documentPath;
                 }
             } else {
-                throw new RuntimeException("@FirebaseDocument annotation's value is not set!");
+                throw new RuntimeException("@FirebaseDocumentPath annotation's value is not set!");
             }
         } else {
-            throw new RuntimeException("There is no @FirebaseDocument annotation!");
+            throw new RuntimeException("There is no @FirebaseDocumentPath annotation!");
         }
 
         this.documentIdField = (Field)Arrays.stream(this.firebaseConnectionClazz.getDeclaredFields()).filter((field) -> {
             return field.isAnnotationPresent(FirebaseDocumentId.class);
         }).findFirst().orElseThrow(() -> {
-            return new RuntimeException();
+            return new RuntimeException("There is no @FirebaseDocumentId annotation!");
         });
 
         this.authKeyField = (Field)Arrays.stream(this.firebaseConnectionClazz.getDeclaredFields()).filter((field) -> {
             return field.isAnnotationPresent(FirebaseUserAuthKey.class);
         }).findFirst().orElseThrow(() -> {
-            return new RuntimeException();
+            return new RuntimeException("There is no @FirebaseUserAuthKey annotation!");
         });
 
     }
-
 
     @Override
     public FD read(FC fc) {
@@ -89,6 +88,13 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
             throw new RuntimeException(e);
         }
 
+        if (documentId.isEmpty()) {
+            throw new RuntimeException("@FirebaseDocumentId annotation's value is not set!");
+        }
+        if (authKey.isEmpty()) {
+            throw new RuntimeException("@FirebaseUserAuthKey annotation's value is not set!");
+        }
+
         String url = SecretConstants.FIREBASE_PROJECT_URL;
         url = url + this.documentPath + "/" + documentId + ".json?auth=" + authKey;
 
@@ -108,7 +114,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
         }
 
         if (responseEntity.getBody() == null) {
-            throw new HttpNotFoundException("FirebaseId Not Found");
+            throw new HttpNotFoundException("FirebaseDocumentId Not Found");
         }
 
         return responseEntity.getBody();
