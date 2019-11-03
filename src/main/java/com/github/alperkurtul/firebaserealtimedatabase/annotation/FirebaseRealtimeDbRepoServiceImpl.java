@@ -108,7 +108,6 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
             } else if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
-                System.out.println("Gercekten NOT FOUND");
                 throw new HttpNotFoundException(e.getResponseBodyAsString());
             } else if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
                 throw new HttpUnauthorizedException(e.getResponseBodyAsString());
