@@ -12,4 +12,8 @@ public class FirebaseConfig {
         return new RestTemplate();
     }
 
+//    @Bean
+//    public com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseDbConfig firebaseDbConfig() {
+//        return new FirebaseDbConfig();
+//    }
 }

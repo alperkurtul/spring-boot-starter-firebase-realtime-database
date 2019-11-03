@@ -1,5 +1,6 @@
 package com.github.alperkurtul.useoffirebaserealtimedatabase.restcontroller;
 
+import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseDbConfig;
 import com.github.alperkurtul.useoffirebaserealtimedatabase.model.FirebaseAuthKeyAndDocumentId;
 import com.github.alperkurtul.useoffirebaserealtimedatabase.model.Product;
 import com.github.alperkurtul.useoffirebaserealtimedatabase.repository.ProductRepository;

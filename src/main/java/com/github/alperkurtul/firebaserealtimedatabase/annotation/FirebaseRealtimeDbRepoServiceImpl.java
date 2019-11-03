@@ -3,7 +3,7 @@ package com.github.alperkurtul.firebaserealtimedatabase.annotation;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpBadRequestException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpNotFoundException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpUnauthorizedException;
-import com.github.alperkurtul.useoffirebaserealtimedatabase.constants.SecretConstants;
+import com.github.alperkurtul.useoffirebaserealtimedatabase.constants.FirebaseDbConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +22,9 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
 
     @Autowired
     private RestTemplate restTemplate;
+
+    //@Autowired
+    //private FirebaseDbConfig firebaseDbConfig;
 
     private Class<FC> firebaseConnectionClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     private Class<FD> firebaseDocumentClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
@@ -95,7 +98,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
             throw new RuntimeException("@FirebaseUserAuthKey annotation's value is not set!");
         }
 
-        String url = SecretConstants.FIREBASE_PROJECT_URL;
+        String url = FirebaseDbConstants.FIREBASE_PROJECT_URL;
         url = url + this.documentPath + "/" + documentId + ".json?auth=" + authKey;
 
         ResponseEntity<FD> responseEntity = null;
