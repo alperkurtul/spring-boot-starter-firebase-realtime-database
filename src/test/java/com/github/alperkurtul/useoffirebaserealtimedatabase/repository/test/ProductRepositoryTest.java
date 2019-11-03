@@ -32,7 +32,6 @@ public class ProductRepositoryTest {
         public RestTemplate restTemplate() {
             return new RestTemplate();
         }
-
         @Bean
         public ProductRepository productRepository() {
             return new ProductRepository();
