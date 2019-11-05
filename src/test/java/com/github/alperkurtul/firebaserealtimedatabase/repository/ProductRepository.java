@@ -1,8 +1,8 @@
-package com.github.alperkurtul.useoffirebaserealtimedatabase.repository;
+package com.github.alperkurtul.firebaserealtimedatabase.repository;
 
 import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseRealtimeDbRepoServiceImpl;
-import com.github.alperkurtul.useoffirebaserealtimedatabase.model.FirebaseAuthKeyAndDocumentId;
-import com.github.alperkurtul.useoffirebaserealtimedatabase.model.Product;
+import com.github.alperkurtul.firebaserealtimedatabase.model.FirebaseAuthKeyAndDocumentId;
+import com.github.alperkurtul.firebaserealtimedatabase.model.Product;
 import org.springframework.stereotype.Repository;
 
 @Repository

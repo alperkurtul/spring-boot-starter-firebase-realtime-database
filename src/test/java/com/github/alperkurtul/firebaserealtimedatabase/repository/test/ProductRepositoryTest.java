@@ -1,11 +1,11 @@
-package com.github.alperkurtul.useoffirebaserealtimedatabase.repository.test;
+package com.github.alperkurtul.firebaserealtimedatabase.repository.test;
 
 import com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseSaveResponse;
 import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseDbConfig;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpNotFoundException;
-import com.github.alperkurtul.useoffirebaserealtimedatabase.model.FirebaseAuthKeyAndDocumentId;
-import com.github.alperkurtul.useoffirebaserealtimedatabase.model.Product;
-import com.github.alperkurtul.useoffirebaserealtimedatabase.repository.ProductRepository;
+import com.github.alperkurtul.firebaserealtimedatabase.model.FirebaseAuthKeyAndDocumentId;
+import com.github.alperkurtul.firebaserealtimedatabase.model.Product;
+import com.github.alperkurtul.firebaserealtimedatabase.repository.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
