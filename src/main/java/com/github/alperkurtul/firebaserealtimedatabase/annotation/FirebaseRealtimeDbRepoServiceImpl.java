@@ -1,5 +1,6 @@
 package com.github.alperkurtul.firebaserealtimedatabase.annotation;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseSaveResponse;
 import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseDbConfig;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpBadRequestException;
@@ -28,6 +29,9 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private ObjectMapper firebaseObjectMapper;
 
     @Autowired
     private FirebaseDbConfig firebaseDbConfig;
