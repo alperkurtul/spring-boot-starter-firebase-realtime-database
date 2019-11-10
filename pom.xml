@@ -14,7 +14,7 @@
     <!-- **************************************************************  -->
     <groupId>com.github.alperkurtul</groupId>
     <artifactId>spring-boot-starter-firebase-realtime-database</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.1.RELEASE</version>
 
     <name>Managing with Firebase Realtime Database</name>
     <description>This library is used for accessing to the Firebase Realtime Database.</description>
