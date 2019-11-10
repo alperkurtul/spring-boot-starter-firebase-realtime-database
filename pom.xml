@@ -10,7 +10,7 @@
     </parent>
 
     <!-- **************************************************************  -->
-    <!-- Uploading requirements to the Maven Central Repository          -->
+    <!-- Uploading requirements for the Maven Central Repository          -->
     <!-- **************************************************************  -->
     <groupId>com.github.alperkurtul</groupId>
     <artifactId>spring-boot-starter-firebase-realtime-database</artifactId>
@@ -65,7 +65,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
@@ -81,12 +80,8 @@
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--            </plugin>-->
             <!-- **************************************************************  -->
-            <!-- Uploading requirements to the Maven Central Repository          -->
+            <!-- Uploading requirements for the Maven Central Repository          -->
             <!-- **************************************************************  -->
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
