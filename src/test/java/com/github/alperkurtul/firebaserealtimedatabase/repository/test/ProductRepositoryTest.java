@@ -1,11 +1,11 @@
 package com.github.alperkurtul.firebaserealtimedatabase.repository.test;
 
 import com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseSaveResponse;
+import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseConfiguration;
 import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseDbConfig;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpNotFoundException;
-import com.github.alperkurtul.firebaserealtimedatabase.model.FirebaseAuthKeyAndDocumentId;
-import com.github.alperkurtul.firebaserealtimedatabase.model.Product;
-import com.github.alperkurtul.firebaserealtimedatabase.repository.ProductRepository;
+import com.github.alperkurtul.firebaserealtimedatabase.repository.model.Product;
+import com.github.alperkurtul.firebaserealtimedatabase.repository.model.ProductRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +22,13 @@ import java.math.BigDecimal;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
-@SpringBootTest(classes = FirebaseDbConfig.class)
+@SpringBootTest(classes = FirebaseConfiguration.class)
 @RunWith(SpringRunner.class)
 @Import(ProductRepositoryTest.RepositoryTestConfiguration.class)
 @EnableConfigurationProperties(FirebaseDbConfig.class)
 public class ProductRepositoryTest {
 
-    private String userAuthKey = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjVkY2U3ZTQxYWRkMTIxYjg2ZWQ0MDRiODRkYTc1NzM5NDY3ZWQyYmMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZmx1dHRlci1wcm9kdWN0cy1hYzIwMyIsImF1ZCI6ImZsdXR0ZXItcHJvZHVjdHMtYWMyMDMiLCJhdXRoX3RpbWUiOjE1NzI3ODQ3MzMsInVzZXJfaWQiOiJJVHh5dXY5Q1lKaHA0SUVodnF2eFowYjZEQngyIiwic3ViIjoiSVR4eXV2OUNZSmhwNElFaHZxdnhaMGI2REJ4MiIsImlhdCI6MTU3Mjc4NDczMywiZXhwIjoxNTcyNzg4MzMzLCJlbWFpbCI6InRlc3Q3QHRlc3QuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInRlc3Q3QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.sFziVJYsESswwTSWf0_9cBV-ipTm7dnGe0NqhHng_FD8fYfwu94tN043ZLg5vSOWM3UHCI0EclEjq4RdEo29uRG1DFU4v4EYHd-1bgeBHq2Wg3GrbECDCvRSqUvfcMQwzJi-Th930xHHipsGIkpPBsSCiL7xmhrWWo6hJb7khXrRXKNJXZ0uyPPN2eEAplemIyAfpEfKTNYY1Ijc4ZZLkXJAho8-ejiyISQ2Yz7BwwHnMmGh7xLw4pyy8rkL6KkfTSmGhVirc4XwjeRA5QuDsOSiDlTInAm_AFAz6FjnrLPTVTIsGvSOIN1fHN9qTOKonfL7oxAZJkQKZtz201KffQ";
+    private String userAuthKey = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1MDgxMWNkYzYwOWQ5MGY5ODE1MTE5MWIyYmM5YmQwY2ViOWMwMDQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vZmx1dHRlci1wcm9kdWN0cy1hYzIwMyIsImF1ZCI6ImZsdXR0ZXItcHJvZHVjdHMtYWMyMDMiLCJhdXRoX3RpbWUiOjE1NzMzNjk5NDEsInVzZXJfaWQiOiJJVHh5dXY5Q1lKaHA0SUVodnF2eFowYjZEQngyIiwic3ViIjoiSVR4eXV2OUNZSmhwNElFaHZxdnhaMGI2REJ4MiIsImlhdCI6MTU3MzM2OTk0MSwiZXhwIjoxNTczMzczNTQxLCJlbWFpbCI6InRlc3Q3QHRlc3QuY29tIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7ImVtYWlsIjpbInRlc3Q3QHRlc3QuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.SG2w7fZacBUzAYCGTBRT1cYeDObXrsDJmEjJWkyH7YxPlnhZfAqWHj3dTkpO2qoQElxTCW3kUZE9U8NtWer8gBmNq6mvCPmBJZvwqnGpU043wjLNqfEDiQLMNde7_wt2kHJzRpsPlhyfkJ6h7leHChOoBEZoKoCbarkn0dcYv2a_4215LMwDeXU4D7V7bJ8qaIZiEZlesOKu8yaE1nt8IpdjARHJx4L6txzQbHKIjfEdz0kpvlvaXvzmY40jnJEIBWWwfh7n2HYe3bp05W9NFTbh7-bs9r69ae565FNt87ThrwmvwVG0G41tdj3WdQYvu1ZCkiDHMCosXO1fD8LBUQ";
     private String firebaseId = "";
 
     @TestConfiguration
@@ -52,37 +52,35 @@ public class ProductRepositoryTest {
     @Test
     public void itShouldSaveReadUpdateDeleteAndSaveAgainWithSuccess() {
 
-        FirebaseAuthKeyAndDocumentId firebaseAuthKeyAndDocumentId = new FirebaseAuthKeyAndDocumentId(this.userAuthKey, "");
-
         Product product = new Product();
+        product.setAuthKey(this.userAuthKey);
         product.setId("JUnit-0001");
         product.setName("Spring Boot JUnit Test");
         product.setPrice(BigDecimal.valueOf(12,55));
-        FirebaseSaveResponse savedResponse = productRepository.save(firebaseAuthKeyAndDocumentId, product);
+        FirebaseSaveResponse savedResponse = productRepository.save(product);
         assertNotNull(savedResponse);
         assertNotNull(savedResponse.getName());
         assertNotEquals(savedResponse.getName(), "");
         this.firebaseId = savedResponse.getName();
-        firebaseAuthKeyAndDocumentId.setFirebaseId(this.firebaseId);
+        product.setFirebaseId(this.firebaseId);
 
-        Product read = productRepository.read(firebaseAuthKeyAndDocumentId);
+        Product read = productRepository.read(product);
         assertNotNull(read);
         assertNotNull(read.getId());
         assertThat(read.getId(), is(product.getId()));
 
         product.setName("Spring Boot JUnit Test-UPDATED");
-        productRepository.update(firebaseAuthKeyAndDocumentId, product);
-        Product updatedResponse = productRepository.read(firebaseAuthKeyAndDocumentId);
+        productRepository.update(product);
+        Product updatedResponse = productRepository.read(product);
         assertNotNull(updatedResponse);
         assertNotNull(updatedResponse.getId());
         assertThat(read.getId(), is(updatedResponse.getId()));
         assertThat(updatedResponse.getName(), is(product.getName()));
 
-        productRepository.delete(firebaseAuthKeyAndDocumentId);
+        productRepository.delete(product);
         try {
-            Product deletedResponse = productRepository.read(firebaseAuthKeyAndDocumentId);
+            Product deletedResponse = productRepository.read(product);
         } catch (HttpNotFoundException e) {
-            //e.printStackTrace();
             assertThat(e.getMessage(), is("FirebaseDocumentId Not Found"));
         }
 

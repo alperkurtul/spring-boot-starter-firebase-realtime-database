@@ -2,16 +2,14 @@ package com.github.alperkurtul.firebaserealtimedatabase.annotation;
 
 import com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseSaveResponse;
 
-public interface FirebaseRealtimeDbRepoService<FC, FD, ID> {
-    // Type <FC> : Class for Firebase Connection info and Document Id info
-    // Type <FD> : Class for Firebase Document
+public interface FirebaseRealtimeDbRepoService<T, ID> {
 
-    public FD read(FC fc);
+    public T read(T obj);
 
-    public FirebaseSaveResponse save(FC fc, FD fd);
+    public FirebaseSaveResponse save(T obj);
 
-    public void update(FC fc, FD fd);
+    public void update(T obj);
 
-    public void delete(FC fc);
+    public void delete(T obj);
 
 }

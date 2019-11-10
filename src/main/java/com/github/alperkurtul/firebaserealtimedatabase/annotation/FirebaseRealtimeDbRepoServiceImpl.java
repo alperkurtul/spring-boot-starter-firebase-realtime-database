@@ -19,12 +19,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
 
-public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRealtimeDbRepoService<FC, FD, ID> {
-    /*
-    Type <FC> : Class for Firebase Connection info and Document Id info
-    Type <FD> : Class for Firebase Document
-    */
-
+public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtimeDbRepoService<T, ID> {
     /*
     Firebase Docs
     Firebase Database Rest API
@@ -37,9 +32,8 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
     @Autowired
     private FirebaseDbConfig firebaseDbConfig;
 
-    private Class<FC> firebaseConnectionClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-    private Class<FD> firebaseDocumentClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
-    private Class<ID> documentIdClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[2];
+    private Class<T> firebaseDocumentClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+    private Class<ID> documentIdClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
     private String documentPath;
     private Field authKeyField;
     private Field documentIdField;
@@ -59,13 +53,13 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
             throw new RuntimeException("There is no @FirebaseDocumentPath annotation!");
         }
 
-        this.documentIdField = (Field)Arrays.stream(this.firebaseConnectionClazz.getDeclaredFields()).filter((field) -> {
+        this.documentIdField = (Field)Arrays.stream(this.firebaseDocumentClazz.getDeclaredFields()).filter((field) -> {
             return field.isAnnotationPresent(FirebaseDocumentId.class);
         }).findFirst().orElseThrow(() -> {
             return new RuntimeException("There is no @FirebaseDocumentId annotation!");
         });
 
-        this.authKeyField = (Field)Arrays.stream(this.firebaseConnectionClazz.getDeclaredFields()).filter((field) -> {
+        this.authKeyField = (Field)Arrays.stream(this.firebaseDocumentClazz.getDeclaredFields()).filter((field) -> {
             return field.isAnnotationPresent(FirebaseUserAuthKey.class);
         }).findFirst().orElseThrow(() -> {
             return new RuntimeException("There is no @FirebaseUserAuthKey annotation!");
@@ -74,14 +68,14 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
     }
 
     @Override
-    public FD read(FC fc) {
+    public T read(T obj) {
         /*
         Firebase Database REST API
         GET - Reading Data
         */
 
-        String url = generateUrl(fc, "read");
-        ResponseEntity<FD> responseEntity = null;
+        String url = generateUrl(obj, "read");
+        ResponseEntity<T> responseEntity = null;
         try {
             responseEntity = restTemplate.getForEntity(url, this.firebaseDocumentClazz);
         } catch (HttpStatusCodeException e) {
@@ -105,14 +99,14 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
     }
 
     @Override
-    public FirebaseSaveResponse save(FC fc, FD fd) {
+    public FirebaseSaveResponse save(T obj) {
         /*
         Firebase Database REST API
         POST - Pushing Data
         */
 
-        String url = generateUrl(fc, "save");
-        JSONObject requestBodyJsonObject = new JSONObject(fd);
+        String url = generateUrl(obj, "save");
+        JSONObject requestBodyJsonObject = new JSONObject(obj);
         HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
         ResponseEntity<FirebaseSaveResponse> responseEntity = null;
         try {
@@ -134,18 +128,18 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
     }
 
     @Override
-    public void update(FC fc, FD fd) {
+    public void update(T obj) {
         /*
         Firebase Database REST API
         PUT - Writing Data
         */
 
         // Checking the data if it exists or not
-        read(fc);
+        read(obj);
 
         // Updating data
-        String url = generateUrl(fc, "update");
-        JSONObject requestBodyJsonObject = new JSONObject(fd);
+        String url = generateUrl(obj, "update");
+        JSONObject requestBodyJsonObject = new JSONObject(obj);
         HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
         try {
             restTemplate.put(url, requestBody);
@@ -164,17 +158,17 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
     }
 
     @Override
-    public void delete(FC fc) {
+    public void delete(T obj) {
         /*
         Firebase Database REST API
         DELETE - Removing Data
         */
 
         // Checking the data if it exists or not
-        read(fc);
+        read(obj);
 
         // Deleting data
-        String url = generateUrl(fc, "delete");
+        String url = generateUrl(obj, "delete");
         try {
             restTemplate.delete(url);
         } catch (HttpStatusCodeException e) {
@@ -191,22 +185,22 @@ public class FirebaseRealtimeDbRepoServiceImpl<FC, FD, ID> implements FirebaseRe
 
     }
 
-    private String generateUrl(FC fc, String callerMethod) {
+    private String generateUrl(T obj, String callerMethod) {
         String authKey;
         String documentId;
         String methodName = "";
 
         try {
             methodName = "get" + this.documentIdField.getName().substring(0,1).toUpperCase() + this.documentIdField.getName().substring(1);
-            Method method = fc.getClass().getMethod(methodName);
-            documentId = (String)method.invoke(fc);
+            Method method = obj.getClass().getMethod(methodName);
+            documentId = (String)method.invoke(obj);
 
             methodName = "get" + this.authKeyField.getName().substring(0,1).toUpperCase() + this.authKeyField.getName().substring(1);
-            method = fc.getClass().getMethod(methodName);
-            authKey = (String)method.invoke(fc);
+            method = obj.getClass().getMethod(methodName);
+            authKey = (String)method.invoke(obj);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
-            throw new RuntimeException("There is no " + methodName + " method in Class " + fc.getClass().getName());
+            throw new RuntimeException("There is no " + methodName + " method in Class " + obj.getClass().getName());
         } catch (IllegalAccessException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
