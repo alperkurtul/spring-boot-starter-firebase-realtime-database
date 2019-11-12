@@ -2,7 +2,7 @@ package com.github.alperkurtul.firebaserealtimedatabase.annotation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseSaveResponse;
-import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseDbConfig;
+import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseDbConfigurationProperties;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.FirebaseRepositoryException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpBadRequestException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpNotFoundException;
@@ -36,7 +36,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
     private ObjectMapper firebaseObjectMapper;
 
     @Autowired
-    private FirebaseDbConfig firebaseDbConfig;
+    private FirebaseDbConfigurationProperties firebaseDbConfigurationProperties;
 
     private Class<T> firebaseDocumentClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     private Class<ID> documentIdClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
@@ -238,7 +238,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
             throw new RuntimeException("@FirebaseUserAuthKey annotation's value is not set!");
         }
 
-        String url = firebaseDbConfig.getDatabaseUrl();
+        String url = firebaseDbConfigurationProperties.getDatabaseUrl();
 
         if (callerMethod.equals("read") || callerMethod.equals("update") || callerMethod.equals("delete")) {
             url = url + this.documentPath + "/" + documentId + ".json?auth=" + authKey;
