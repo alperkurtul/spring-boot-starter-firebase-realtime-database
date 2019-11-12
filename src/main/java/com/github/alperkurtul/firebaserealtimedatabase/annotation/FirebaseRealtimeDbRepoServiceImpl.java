@@ -155,8 +155,16 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
 
         // Updating data
         String url = generateUrl(obj, "update");
-        JSONObject requestBodyJsonObject = new JSONObject(obj);
-        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
+
+//        JSONObject requestBodyJsonObject = new JSONObject(obj);
+//        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
+        HttpEntity requestBody = null;
+        try {
+            requestBody = new HttpEntity<>(firebaseObjectMapper.writeValueAsString(obj), null);
+        } catch (IOException e) {
+            throw new FirebaseRepositoryException(e.getMessage());
+        }
+
         try {
             restTemplate.put(url, requestBody);
         } catch (HttpStatusCodeException e) {
