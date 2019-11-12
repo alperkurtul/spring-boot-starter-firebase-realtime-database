@@ -3,6 +3,7 @@ package com.github.alperkurtul.firebaserealtimedatabase.annotation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseSaveResponse;
 import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseDbConfig;
+import com.github.alperkurtul.firebaserealtimedatabase.exception.FirebaseRepositoryException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpBadRequestException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpNotFoundException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpUnauthorizedException;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -110,8 +112,18 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         */
 
         String url = generateUrl(obj, "save");
-        JSONObject requestBodyJsonObject = new JSONObject(obj);
-        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
+//        JSONObject requestBodyJsonObject = new JSONObject(obj);
+//        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
+
+//        HttpEntity requestBody = HttpEntityBuilder.create(firebaseObjectMapper).document(obj).build();
+
+        HttpEntity requestBody = null;
+        try {
+            requestBody = new HttpEntity<>(firebaseObjectMapper.writeValueAsString(obj), null);
+        } catch (IOException e) {
+            throw new FirebaseRepositoryException(e.getMessage());
+        }
+
         ResponseEntity<FirebaseSaveResponse> responseEntity = null;
         try {
             responseEntity = restTemplate.postForEntity(url, requestBody, FirebaseSaveResponse.class);
