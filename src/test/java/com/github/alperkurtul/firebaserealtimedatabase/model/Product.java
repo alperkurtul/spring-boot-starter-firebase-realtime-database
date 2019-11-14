@@ -1,4 +1,4 @@
-package com.github.alperkurtul.firebaserealtimedatabase.repository.model;
+package com.github.alperkurtul.firebaserealtimedatabase.model;
 
 import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseDocumentId;
 import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseDocumentPath;

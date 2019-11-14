@@ -2,8 +2,7 @@ package com.github.alperkurtul.firebaserealtimedatabase.annotation;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseSaveResponse;
-import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseDbConfigurationProperties;
-import com.github.alperkurtul.firebaserealtimedatabase.exception.FirebaseRepositoryException;
+import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseRealtimeDatabaseConfigurationProperties;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpBadRequestException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpNotFoundException;
 import com.github.alperkurtul.firebaserealtimedatabase.exception.HttpUnauthorizedException;
@@ -15,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -30,13 +28,10 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
     */
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
     private ObjectMapper firebaseObjectMapper;
 
     @Autowired
-    private FirebaseDbConfigurationProperties firebaseDbConfigurationProperties;
+    private FirebaseRealtimeDatabaseConfigurationProperties firebaseRealtimeDatabaseConfigurationProperties;
 
     private Class<T> firebaseDocumentClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     private Class<ID> documentIdClazz = (Class)((ParameterizedType)this.getClass().getGenericSuperclass()).getActualTypeArguments()[1];
@@ -83,7 +78,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         String url = generateUrl(obj, "read");
         ResponseEntity<T> responseEntity = null;
         try {
-            responseEntity = restTemplate.getForEntity(url, this.firebaseDocumentClazz);
+            responseEntity = new RestTemplate().getForEntity(url, this.firebaseDocumentClazz);
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
@@ -112,21 +107,12 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         */
 
         String url = generateUrl(obj, "save");
-//        JSONObject requestBodyJsonObject = new JSONObject(obj);
-//        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
-
-//        HttpEntity requestBody = HttpEntityBuilder.create(firebaseObjectMapper).document(obj).build();
-
-        HttpEntity requestBody = null;
-        try {
-            requestBody = new HttpEntity<>(firebaseObjectMapper.writeValueAsString(obj), null);
-        } catch (IOException e) {
-            throw new FirebaseRepositoryException(e.getMessage());
-        }
+        JSONObject requestBodyJsonObject = new JSONObject(obj);
+        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
 
         ResponseEntity<FirebaseSaveResponse> responseEntity = null;
         try {
-            responseEntity = restTemplate.postForEntity(url, requestBody, FirebaseSaveResponse.class);
+            responseEntity = new RestTemplate().postForEntity(url, requestBody, FirebaseSaveResponse.class);
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
@@ -156,17 +142,11 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         // Updating data
         String url = generateUrl(obj, "update");
 
-//        JSONObject requestBodyJsonObject = new JSONObject(obj);
-//        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
-        HttpEntity requestBody = null;
-        try {
-            requestBody = new HttpEntity<>(firebaseObjectMapper.writeValueAsString(obj), null);
-        } catch (IOException e) {
-            throw new FirebaseRepositoryException(e.getMessage());
-        }
+        JSONObject requestBodyJsonObject = new JSONObject(obj);
+        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
 
         try {
-            restTemplate.put(url, requestBody);
+            new RestTemplate().put(url, requestBody);
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
@@ -194,7 +174,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         // Deleting data
         String url = generateUrl(obj, "delete");
         try {
-            restTemplate.delete(url);
+            new RestTemplate().delete(url);
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
@@ -246,7 +226,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
             throw new RuntimeException("@FirebaseUserAuthKey annotation's value is not set!");
         }
 
-        String url = firebaseDbConfigurationProperties.getDatabaseUrl();
+        String url = firebaseRealtimeDatabaseConfigurationProperties.getDatabaseUrl();
 
         if (callerMethod.equals("read") || callerMethod.equals("update") || callerMethod.equals("delete")) {
             url = url + this.documentPath + "/" + documentId + ".json?auth=" + authKey;

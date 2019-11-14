@@ -9,7 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class FirebaseDbConfiguration {
+public class FirebaseRealtimeDatabaseConfiguration {
+
+    @Bean
+    FirebaseRealtimeDatabaseConfigurationProperties firebaseRealtimeDatabaseConfigurationProperties() {
+        return new FirebaseRealtimeDatabaseConfigurationProperties();
+    }
 
     @Bean
     public ObjectMapper firebaseObjectMapper() {

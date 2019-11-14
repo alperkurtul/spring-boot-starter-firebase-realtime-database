@@ -1,8 +1,7 @@
-package com.github.alperkurtul.firebaserealtimedatabase.repository.model;
+package com.github.alperkurtul.firebaserealtimedatabase.repository;
 
 import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseRealtimeDbRepoServiceImpl;
-import org.springframework.stereotype.Repository;
+import com.github.alperkurtul.firebaserealtimedatabase.model.Product;
 
-@Repository
 public class ProductRepository extends FirebaseRealtimeDbRepoServiceImpl<Product, String> {
 }

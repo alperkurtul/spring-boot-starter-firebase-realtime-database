@@ -14,15 +14,6 @@ import java.util.Date;
 @RestController
 public class CustomizedExceptionHandler extends ResponseEntityExceptionHandler {
 
-//    @ExceptionHandler(Exception.class)
-//    public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
-//
-//        ex.printStackTrace();
-//        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-//
-//        return new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-
     @ExceptionHandler(HttpNotFoundException.class)
     public final ResponseEntity<Object> handleHttpNotFoundException(HttpNotFoundException ex, WebRequest request) {
 

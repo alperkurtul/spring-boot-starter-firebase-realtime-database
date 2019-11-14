@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConfigurationProperties("firebase-realtime-database")
-public class FirebaseDbConfigurationProperties {
+public class FirebaseRealtimeDatabaseConfigurationProperties {
     private String databaseUrl;
 
     public String getDatabaseUrl() {
