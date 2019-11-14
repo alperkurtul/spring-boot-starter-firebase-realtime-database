@@ -1,0 +1,24 @@
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n    <modelVersion>4.0.0</modelVersion>\n    <parent>\n        <groupId>org.springframework.boot</groupId>\n        <artifactId>spring-boot-starter-parent</artifactId>\n        <version>2.2.0.RELEASE</version>\n        <relativePath/> <!-- lookup parent from repository -->\n    </parent>\n    <groupId>com.github.alperkutul.firebaserealtimedatabase</groupId>\n    <artifactId>firebase-realtime-database</artifactId>\n    <version>0.0.1-SNAPSHOT</version>\n    <name>firebase-realtime-database</name>\n    <description>Usage of Firebase Realtime Database</description>\n\n    <properties>\n        <java.version>1.8</java.version>\n    </properties>\n\n    <dependencies>\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-web</artifactId>\n        </dependency>\n\n        <!-- https://mvnrepository.com/artifact/org.json/json -->\n        <dependency>\n            <groupId>org.json</groupId>\n            <artifactId>json</artifactId>\n            <version>20190722</version>\n        </dependency>\n\n        <dependency>\n            <groupId>io.springfox</groupId>\n            <artifactId>springfox-swagger2</artifactId>\n            <version>2.9.2</version>\n        </dependency>\n        <dependency>\n            <groupId>io.springfox</groupId>\n            <artifactId>springfox-swagger-ui</artifactId>\n            <version>2.9.2</version>\n        </dependency>\n\n        <dependency>\n            <groupId>org.springframework.boot</groupId>\n            <artifactId>spring-boot-starter-test</artifactId>\n            <scope>test</scope>\n        </dependency>\n    </dependencies>\n\n    <build>\n        <plugins>\n            <plugin>\n                <groupId>org.springframework.boot</groupId>\n                <artifactId>spring-boot-maven-plugin</artifactId>\n            </plugin>\n        </plugins>\n    </build>\n\n</project>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(revision 8e63be64e55353586d53da813f17c0bf35461fc9)
++++ pom.xml	(date 1573372577930)
+@@ -8,9 +8,11 @@
+         <version>2.2.0.RELEASE</version>
+         <relativePath/> <!-- lookup parent from repository -->
+     </parent>
+-    <groupId>com.github.alperkutul.firebaserealtimedatabase</groupId>
+-    <artifactId>firebase-realtime-database</artifactId>
+-    <version>0.0.1-SNAPSHOT</version>
++
++    <groupId>com.github.alperkurtul</groupId>
++    <artifactId>spring-boot-starter-firebase-realtime-database</artifactId>
++    <version>1.0.0.RELEASE</version>
++
+     <name>firebase-realtime-database</name>
+     <description>Usage of Firebase Realtime Database</description>
+ 
