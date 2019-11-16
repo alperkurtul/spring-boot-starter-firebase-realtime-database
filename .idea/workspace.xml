@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f1887293-55b5-484c-9aa1-c78035b84e89" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -133,7 +131,7 @@
       <workItem from="1573497106568" duration="1974000" />
       <workItem from="1573591828725" duration="4854000" />
       <workItem from="1573675279860" duration="6610000" />
-      <workItem from="1573753055830" duration="8008000" />
+      <workItem from="1573753055830" duration="8839000" />
     </task>
     <task id="LOCAL-00001" summary="upload to repository">
       <created>1572384457544</created>
@@ -338,7 +336,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573763917303</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="upload to repository">
+      <created>1573764473929</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1573764473929</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
