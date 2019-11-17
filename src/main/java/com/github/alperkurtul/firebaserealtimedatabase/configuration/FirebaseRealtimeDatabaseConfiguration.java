@@ -7,6 +7,7 @@ import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseDocume
 import com.github.alperkurtul.firebaserealtimedatabase.annotation.FirebaseUserAuthKey;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class FirebaseRealtimeDatabaseConfiguration {
@@ -14,6 +15,11 @@ public class FirebaseRealtimeDatabaseConfiguration {
     @Bean
     FirebaseRealtimeDatabaseConfigurationProperties firebaseRealtimeDatabaseConfigurationProperties() {
         return new FirebaseRealtimeDatabaseConfigurationProperties();
+    }
+
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
     @Bean

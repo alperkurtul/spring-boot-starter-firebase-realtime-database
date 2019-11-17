@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f1887293-55b5-484c-9aa1-c78035b84e89" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_2019_11_15_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_11_2019_11_15__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/configuration/FirebaseRealtimeDatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/configuration/FirebaseRealtimeDatabaseConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,6 +138,10 @@
       <workItem from="1573591828725" duration="4854000" />
       <workItem from="1573675279860" duration="6610000" />
       <workItem from="1573753055830" duration="8839000" />
+      <workItem from="1573930651786" duration="309000" />
+      <workItem from="1573936544567" duration="1133000" />
+      <workItem from="1573975351255" duration="3936000" />
+      <workItem from="1573996079507" duration="818000" />
     </task>
     <task id="LOCAL-00001" summary="upload to repository">
       <created>1572384457544</created>
@@ -343,7 +353,21 @@
       <option name="project" value="LOCAL" />
       <updated>1573764473929</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="upload to repository">
+      <created>1573930819581</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1573930819581</updated>
+    </task>
+    <task id="LOCAL-00032" summary="upload to repository">
+      <created>1573930899092</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1573930899092</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,12 +436,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/configuration/FirebaseRealtimeDatabaseConfiguration.java</url>
-          <line>24</line>
+          <line>30</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/configuration/FirebaseRealtimeDatabaseConfiguration.java</url>
-          <line>26</line>
+          <line>32</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
       </breakpoints>

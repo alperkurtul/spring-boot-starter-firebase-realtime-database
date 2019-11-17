@@ -28,6 +28,9 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
     */
 
     @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
     private ObjectMapper firebaseObjectMapper;
 
     @Autowired
@@ -78,7 +81,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         String url = generateUrl(obj, "read");
         ResponseEntity<T> responseEntity = null;
         try {
-            responseEntity = new RestTemplate().getForEntity(url, this.firebaseDocumentClazz);
+            responseEntity = restTemplate.getForEntity(url, this.firebaseDocumentClazz);
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
@@ -112,7 +115,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
 
         ResponseEntity<FirebaseSaveResponse> responseEntity = null;
         try {
-            responseEntity = new RestTemplate().postForEntity(url, requestBody, FirebaseSaveResponse.class);
+            responseEntity = restTemplate.postForEntity(url, requestBody, FirebaseSaveResponse.class);
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
@@ -146,7 +149,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
 
         try {
-            new RestTemplate().put(url, requestBody);
+            restTemplate.put(url, requestBody);
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
@@ -174,7 +177,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         // Deleting data
         String url = generateUrl(obj, "delete");
         try {
-            new RestTemplate().delete(url);
+            restTemplate.delete(url);
         } catch (HttpStatusCodeException e) {
             if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
                 throw new HttpBadRequestException(e.getResponseBodyAsString());
