@@ -1,5 +1,6 @@
 # `Firebase Realtime Database` in Spring Boot
-This 
+This project gives you the ability to access to Firebase Realtime Database. To achieve this, it is enough you to use some basic annotations and define a generic repository. 
+
 <h4>aaaaaaaaa</h4>
 
 <a target="_blank" href="https://oss.sonatype.org/content/repositories/snapshots/com/github/alperkurtul/spring-boot-starter-firebase-realtime-database/">`oss_sonatype_org`</a> 
