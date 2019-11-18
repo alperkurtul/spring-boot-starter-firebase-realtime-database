@@ -81,14 +81,9 @@ public class DemoApplication {
 }
 ```
 
-That is all !!! 
-Now, you can use the methods...
+## Next
 
-<a target="_blank" href="https://oss.sonatype.org/content/repositories/snapshots/com/github/alperkurtul/spring-boot-starter-firebase-realtime-database/">`oss_sonatype_org`</a> 
+I hope, I will add new features in the next. Don't be shy to send your advice to me.
+Take care...
 
-<a target="_blank" href="https://repo1.maven.org/maven2/com/github/alperkurtul/spring-boot-starter-firebase-realtime-database/">repo1_maven_org</a>
-
-<a target="_blank" href="https://search.maven.org/search?q=g:com.github.alperkurtul%20AND%20a:spring-boot-starter-firebase-realtime-database&core=gav">search_maven_org</a>
-
-<a target="_blank" href="https://mvnrepository.com/artifact/com.github.alperkurtul/spring-boot-starter-firebase-realtime-database">mvnrepository_com</a>
 
