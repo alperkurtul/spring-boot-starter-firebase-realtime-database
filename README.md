@@ -12,12 +12,20 @@ This project gives you the ability to access to `Firebase Realtime Database`. To
 
 Add this property in your `application.properties`.
 ```properties
-firebase-realtime-database.database-url=[firebase realtime ratabase url]
+firebase-realtime-database.database-url=[firebase realtime database url]
 ```
 
 ### Dependencies
 
-Add this dependency in your `pom.xml`.
+Primarily, you have to add `spring-boot-starter-web` dependency in your Spring Boot application.
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+Then, you have to also add this dependency in your `pom.xml`.
 ```xml
 <dependency>
     <groupId>com.github.alperkurtul</groupId>
