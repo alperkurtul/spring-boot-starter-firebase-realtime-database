@@ -1,4 +1,4 @@
-# An Easy Way to use Firebase Realtime Database in Spring Boot
+# An Easy Way to use `Firebase Realtime Database` in Spring Boot
 
 <h4>aaaaaaaaa</h4>
 
