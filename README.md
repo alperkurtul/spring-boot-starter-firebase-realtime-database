@@ -29,10 +29,9 @@ Add this dependency in your `pom.xml`.
 ### and How to Use
 
 1) create a class for your Firebase Realtime Database `Document`
-2) annotate your class as `@FirebaseDocumentPath` and specify a path for your realtime database path.
-3) create a `String` property for your authentication idToken and annotate it as `@FirebaseUserAuthKey`.
-3) create an ID property and annotate it with `@FirebaseDocumentId`
-4) 
+2) annotate this class as `@FirebaseDocumentPath` and specify a path for your realtime database
+3) create a `String` property for your authentication idToken and annotate it as `@FirebaseUserAuthKey`
+4) create a property for the ID and annotate it with `@FirebaseDocumentId`
 
 ```java
 @FirebaseDocumentPath("/product")
@@ -51,18 +50,28 @@ public class Product {
 }
 ```
 
-Then create a class that extends the `DefaultFirebaseRealtimeDatabaseRepository` class, and annotate it with `@Repository`
-or mark it as a Spring `@Bean` in your application configuration.
+Then create a Repository class. This class must extend the `FirebaseRealtimeDbRepoServiceImpl` class.
 
 ```java
 @Repository
-public class AlbumRepository extends DefaultFirebaseRealtimeDatabaseRepository<Album, String> {
+public class ProductRepository extends FirebaseRealtimeDbRepoServiceImpl<Product, String> {
 }
 ```
 
-Finally, put `@EnableFirebaseRepositories` just next to `@SpringBootApplication` or in any `@Configuration` class in your
-application.
+At last, put `@EnableFirebaseRealtimeDatabase` just next to `@SpringBootApplication` in your main class of Spring Boot application.
 
+```java
+@EnableFirebaseRealtimeDatabase
+@SpringBootApplication
+public class DemoApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
+
+
+}
+```
 
 
 
