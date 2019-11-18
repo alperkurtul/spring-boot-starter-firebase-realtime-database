@@ -89,5 +89,3 @@ Here is a demo that I made for you. <a href="https://github.com/alperkurtul/spri
 
 I hope, I will add new features in the next. Don't be shy to send your advice to me.
 Take care...
-
-
