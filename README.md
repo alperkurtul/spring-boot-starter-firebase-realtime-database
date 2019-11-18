@@ -10,5 +10,11 @@
 
 <a target="_blank" href="https://mvnrepository.com/artifact/com.github.alperkurtul/spring-boot-starter-firebase-realtime-database">mvnrepository_com</a>
 
+<dependency>
+    <groupId>com.github.alperkurtul</groupId>
+    <artifactId>spring-boot-starter-firebase-realtime-database</artifactId>
+    <version>1.0.4.RELEASE</version>
+</dependency>
+
 
 <di>aaaaaa</di>
