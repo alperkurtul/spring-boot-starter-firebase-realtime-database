@@ -8,9 +8,9 @@ This project gives you the ability to access to `Firebase Realtime Database`. To
 
 ## How to Apply
 
-
+Add this property in your `application.properties`.
 ```properties
-firebase-realtime-database.database-url=https://flutter-products-ac203.firebaseio.com
+firebase-realtime-database.database-url=[firebase realtime ratabase url]
 ```
 <h4>aaaaaaaaa</h4>
 
