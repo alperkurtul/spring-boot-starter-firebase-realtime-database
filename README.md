@@ -8,7 +8,7 @@ This project gives you the ability to access to `Firebase Realtime Database`. To
 
 ## How to Apply
 
-### Configurations
+### Configuration
 
 Add this property in your `application.properties`.
 ```properties
