@@ -38,10 +38,7 @@ Then, you have to also add this dependency in your `pom.xml`.
 
 1) create a class for your Firebase Realtime Database `Document`
 2) annotate this class as `@FirebaseDocumentPath` and specify a path for your realtime database
-3) create a `String` property for your authentication idToken and annotate it as `@FirebaseUserAuthKey`
-```
-To authenticate Firebase, you can use this project [GitHub Pages](https://pages.github.com/).
-```
+3) create a `String` property for your `authentication idToken` and annotate it as `@FirebaseUserAuthKey`
 4) create a property for the ID and annotate it with `@FirebaseDocumentId`
 
 ```java
@@ -60,6 +57,11 @@ public class Product {
 
 }
 ```
+
+```
+For getting a valid authentication idToken, you can use this project [GitHub Pages](https://pages.github.com/).
+```
+
 
 Then create a Repository class. This class must extend the `FirebaseRealtimeDbRepoServiceImpl` class.
 
