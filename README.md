@@ -59,7 +59,7 @@ public class Product {
 ```
 
 ```
-For getting a valid authentication idToken, you can use this project [GitHub Pages](https://pages.github.com/).
+For getting a valid authentication idToken, you can use this project <a href="https://github.com/alperkurtul/spring-boot-starter-firebase-user-authentication">spring-boot-starter-firebase-user-authentication</a>.
 ```
 
 
