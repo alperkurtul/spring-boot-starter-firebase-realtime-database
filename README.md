@@ -58,10 +58,10 @@ public class Product {
 }
 ```
 
-```
+
 For getting a valid authentication idToken, 
-you can use this project <a href="https://github.com/alperkurtul/spring-boot-starter-firebase-user-authentication">spring-boot-starter-firebase-user-authentication</a>.
-```
+you can use this project <a href="https://github.com/alperkurtul/spring-boot-starter-firebase-user-authentication">`spring-boot-starter-firebase-user-authentication`</a>.
+
 
 
 Then create a Repository class. This class must extend the `FirebaseRealtimeDbRepoServiceImpl` class.
