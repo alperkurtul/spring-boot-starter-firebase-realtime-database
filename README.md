@@ -84,7 +84,7 @@ public class DemoApplication {
 Here is a demo that I made for you. <a href="https://github.com/alperkurtul/spring-boot-starter-firebase-realtime-database-demo">`Demo`</a>
 
 ### Releases
-- 1.0.5.RELEASE
+- 1.0.5.RELEASE (2019-11-27)
   - **BugFix :** Annotated fields (@FirebaseUserAuthKey and @FirebaseDocumentId) also were being saved to Firebase Database. It is fixed.
   - `save` method `@Deprecated`
   - Instead of `save` method, `saveWithRandomId` method was added.
