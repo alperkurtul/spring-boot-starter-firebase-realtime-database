@@ -85,7 +85,7 @@ Here is a demo that I made for you. <a href="https://github.com/alperkurtul/spri
 
 ### Releases
 - 1.0.5.RELEASE
-  - BugFix : Annotated fields (@FirebaseUserAuthKey and @FirebaseDocumentId) also were saved to Firebase Database. It is fixed.
+  - **BugFix :** Annotated fields (@FirebaseUserAuthKey and @FirebaseDocumentId) also were being saved to Firebase Database. It is fixed.
   - `save` method `@Deprecated`
   - Instead of `save` method, `saveWithRandomId` method was added.
   - `saveWithSpecificId` method wad added as a new feature. By using this method, you can set specific FirebaseId of your record.
