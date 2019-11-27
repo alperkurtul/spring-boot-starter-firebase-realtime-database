@@ -1,5 +1,5 @@
 # An Easy Way to Access `Firebase Realtime Database` in Spring Boot
-This project gives you the ability to access to `Firebase Realtime Database`. To achieve this, you just have to add some basic annotations and define a generic repository in your Spring Boot application. These are the list of methods you can use in this release(1.0.4):
+This project gives you the ability to access to `Firebase Realtime Database`. To achieve this, you just have to add some basic annotations and define a generic repository in your Spring Boot application. These are the list of methods you can use in this release(1.0.5):
 
 - save (@Deprecated in 1.0.5.RELEASE)
 - saveWithRandomId (added in 1.0.5.RELEASE)
@@ -30,7 +30,7 @@ Then, you have to also add this dependency in your `pom.xml`.
 <dependency>
     <groupId>com.github.alperkurtul</groupId>
     <artifactId>spring-boot-starter-firebase-realtime-database</artifactId>
-    <version>1.0.4.RELEASE</version>
+    <version>1.0.5.RELEASE</version>
 </dependency>
 ```
 
