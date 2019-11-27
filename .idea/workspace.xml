@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ce345de-b71b-4656-bce7-9b5657017098" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2019_23_51_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_12_11_2019_23_51__Default_Changelist_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,8 +17,14 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_CHANGES_POLICY" value="SHELVE" />
   </component>
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
@@ -33,7 +46,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -88,6 +104,12 @@
       <updated>1574001171339</updated>
       <workItem from="1574001172986" duration="287000" />
       <workItem from="1574001546107" duration="92000" />
+      <workItem from="1574004629497" duration="35000" />
+      <workItem from="1574446840798" duration="47000" />
+      <workItem from="1574447269773" duration="754000" />
+      <workItem from="1574709091513" duration="1616000" />
+      <workItem from="1574711325695" duration="5263000" />
+      <workItem from="1574877638203" duration="7333000" />
     </task>
     <task id="LOCAL-00003" summary="upload to repository">
       <created>1574001430044</created>
@@ -96,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574001430044</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="upload to repository">
+      <created>1574004650375</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1574004650375</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,8 +145,55 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
     <MESSAGE value="." />
     <MESSAGE value="upload to repository" />
     <option name="LAST_COMMIT_MESSAGE" value="upload to repository" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/github/alperkurtul/firebaserealtimedatabase/repository/test/ProductRepositoryTest.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java</url>
+          <line>130</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java</url>
+          <line>175</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java</url>
+          <line>169</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java</url>
+          <line>202</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/github/alperkurtul/firebaserealtimedatabase/annotation/FirebaseRealtimeDbRepoServiceImpl.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

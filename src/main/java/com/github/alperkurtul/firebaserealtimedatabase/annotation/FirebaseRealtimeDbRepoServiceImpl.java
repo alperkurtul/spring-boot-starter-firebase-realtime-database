@@ -1,5 +1,6 @@
 package com.github.alperkurtul.firebaserealtimedatabase.annotation;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.alperkurtul.firebaserealtimedatabase.bean.FirebaseSaveResponse;
 import com.github.alperkurtul.firebaserealtimedatabase.configuration.FirebaseRealtimeDatabaseConfigurationProperties;
@@ -78,7 +79,10 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         GET - Reading Data
         */
 
-        String url = generateUrl(obj, "read");
+        String authKey = getAnnotatedFielValue(obj, this.authKeyField);
+        String firebaseId = getAnnotatedFielValue(obj, this.documentIdField);
+
+        String url = generateUrl("read", authKey, firebaseId);
         ResponseEntity<T> responseEntity = null;
         try {
             responseEntity = restTemplate.getForEntity(url, this.firebaseDocumentClazz);
@@ -102,6 +106,7 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
 
     }
 
+    @Deprecated  // Use 'saveWithRandomId' instead
     @Override
     public FirebaseSaveResponse save(T obj) {
         /*
@@ -109,9 +114,28 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         POST - Pushing Data
         */
 
-        String url = generateUrl(obj, "save");
-        JSONObject requestBodyJsonObject = new JSONObject(obj);
-        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
+        return saveWithRandomId(obj);
+
+    }
+
+    @Override
+    public FirebaseSaveResponse saveWithRandomId(T obj) {
+        /*
+        Firebase Database REST API
+        POST - Pushing Data
+        */
+
+        String authKey = getAnnotatedFielValue(obj, this.authKeyField);
+        String firebaseId = getAnnotatedFielValue(obj, this.documentIdField);
+
+        String url = generateUrl("saveWithRandomId", authKey, firebaseId);
+
+        HttpEntity<String> requestBody = null;
+        try {
+            requestBody = new HttpEntity(firebaseObjectMapper.writeValueAsString(obj));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
         ResponseEntity<FirebaseSaveResponse> responseEntity = null;
         try {
@@ -133,20 +157,78 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
     }
 
     @Override
+    public FirebaseSaveResponse saveWithSpecificId(T obj) {
+        /*
+        Firebase Database REST API
+        PUT - Writing Data
+        */
+
+        String authKey = getAnnotatedFielValue(obj, this.authKeyField);
+        String firebaseId = getAnnotatedFielValue(obj, this.documentIdField);
+
+        // Checking the data if it exists or not
+        String url = "";
+        try {
+            read(obj);
+        } catch (HttpNotFoundException e) {
+            url = generateUrl("saveWithSpecificId", authKey, firebaseId);
+        }
+
+        // If it exists, then throw error
+        if (url.isEmpty()) {
+            throw new HttpBadRequestException("FirebaseDocumentId Already Exists");
+        }
+
+        HttpEntity<String> requestBody = null;
+        try {
+            requestBody = new HttpEntity(firebaseObjectMapper.writeValueAsString(obj));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            restTemplate.put(url, requestBody);
+        } catch (HttpStatusCodeException e) {
+            if (e.getStatusCode() == HttpStatus.BAD_REQUEST) {
+                throw new HttpBadRequestException(e.getResponseBodyAsString());
+            } else if (e.getStatusCode() == HttpStatus.NOT_FOUND) {
+                throw new HttpNotFoundException(e.getResponseBodyAsString());
+            } else if (e.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+                throw new HttpUnauthorizedException(e.getResponseBodyAsString());
+            } else {
+                throw new RuntimeException();
+            }
+        }
+
+        FirebaseSaveResponse firebaseSaveResponse = new FirebaseSaveResponse();
+        firebaseSaveResponse.setName(firebaseId);
+
+        return firebaseSaveResponse;
+
+    }
+
+    @Override
     public void update(T obj) {
         /*
         Firebase Database REST API
         PUT - Writing Data
         */
 
+        String authKey = getAnnotatedFielValue(obj, this.authKeyField);
+        String firebaseId = getAnnotatedFielValue(obj, this.documentIdField);
+
         // Checking the data if it exists or not
         read(obj);
 
         // Updating data
-        String url = generateUrl(obj, "update");
+        String url = generateUrl("update", authKey, firebaseId);
 
-        JSONObject requestBodyJsonObject = new JSONObject(obj);
-        HttpEntity<String> requestBody = new HttpEntity<String>(requestBodyJsonObject.toString());
+        HttpEntity<String> requestBody = null;
+        try {
+            requestBody = new HttpEntity(firebaseObjectMapper.writeValueAsString(obj));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
             restTemplate.put(url, requestBody);
@@ -171,11 +253,14 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         DELETE - Removing Data
         */
 
+        String authKey = getAnnotatedFielValue(obj, this.authKeyField);
+        String firebaseId = getAnnotatedFielValue(obj, this.documentIdField);
+
         // Checking the data if it exists or not
         read(obj);
 
         // Deleting data
-        String url = generateUrl(obj, "delete");
+        String url = generateUrl("delete", authKey, firebaseId);
         try {
             restTemplate.delete(url);
         } catch (HttpStatusCodeException e) {
@@ -192,19 +277,14 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
 
     }
 
-    private String generateUrl(T obj, String callerMethod) {
-        String authKey;
-        String documentId;
+    private String getAnnotatedFielValue(T obj, Field field) {
+        String fieldValue;
         String methodName = "";
 
         try {
-            methodName = "get" + this.documentIdField.getName().substring(0,1).toUpperCase() + this.documentIdField.getName().substring(1);
+            methodName = "get" + field.getName().substring(0,1).toUpperCase() + field.getName().substring(1);
             Method method = obj.getClass().getMethod(methodName);
-            documentId = (String)method.invoke(obj);
-
-            methodName = "get" + this.authKeyField.getName().substring(0,1).toUpperCase() + this.authKeyField.getName().substring(1);
-            method = obj.getClass().getMethod(methodName);
-            authKey = (String)method.invoke(obj);
+            fieldValue = (String)method.invoke(obj);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             throw new RuntimeException("There is no " + methodName + " method in Class " + obj.getClass().getName());
@@ -219,8 +299,14 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
             throw new RuntimeException(e);
         }
 
+        return fieldValue;
+
+    }
+
+    private String generateUrl( String callerMethod, String authKey, String firebaseId) {
+
         if (callerMethod.equals("read") || callerMethod.equals("update") || callerMethod.equals("delete")) {
-            if (documentId.isEmpty()) {
+            if (firebaseId.isEmpty()) {
                 throw new RuntimeException("@FirebaseDocumentId annotation's value is not set!");
             }
         }
@@ -232,9 +318,11 @@ public class FirebaseRealtimeDbRepoServiceImpl<T, ID> implements FirebaseRealtim
         String url = firebaseRealtimeDatabaseConfigurationProperties.getDatabaseUrl();
 
         if (callerMethod.equals("read") || callerMethod.equals("update") || callerMethod.equals("delete")) {
-            url = url + this.documentPath + "/" + documentId + ".json?auth=" + authKey;
-        }if (callerMethod.equals("save")) {
+            url = url + this.documentPath + "/" + firebaseId + ".json?auth=" + authKey;
+        } else if (callerMethod.equals("saveWithRandomId")) {
             url = url + this.documentPath + ".json?auth=" + authKey;
+        } else if (callerMethod.equals("saveWithSpecificId")) {
+            url = url + this.documentPath + "/" + firebaseId + ".json?auth=" + authKey;
         }
 
         return url;

@@ -7,6 +7,9 @@ public interface FirebaseRealtimeDbRepoService<T, ID> {
     public T read(T obj);
 
     public FirebaseSaveResponse save(T obj);
+    public FirebaseSaveResponse saveWithRandomId(T obj);
+
+    public FirebaseSaveResponse saveWithSpecificId(T obj);
 
     public void update(T obj);
 
